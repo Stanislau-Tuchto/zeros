@@ -1,20 +1,11 @@
 module.exports = function getZerosCount(number) {
-    let carry = 0;
-    let arr = [1];
-    let k = 0;
-
-    for (let i = 1; i <= number; i++) {
-        for (let j = 0; j <= k; j++) {
-            arr[j] = arr[j] * i + carry;
-            carry = parseInt(arr[j] / 10, 10);
-            arr[j] = arr[j] % 10;
-        }
-        while (carry) {
-            k++;
-            arr[k] = carry % 10;
-            carry = parseInt(carry / 10, 10);
-        }
+    let zeros = 0, i = 1, five_pow ,flag = true;
+    while(flag) {
+        five_pow = Math.pow(5,i)
+        if(five_pow<number){
+            zeros += (number - number %five_pow)/five_pow;
+            i++;
+        }else flag=false;
     }
-
-    console.log(arr.reverse().join(""));
+    return zeros;
 }
